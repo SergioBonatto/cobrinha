@@ -22,7 +22,7 @@ let food = { //Math.floor retira a parte flutuante (0.) do Math.random, só vem 
 
 // cria BG
 function criarBG() {
-	context.fillStyle = "lightgreen";
+	context.fillStyle = "#121317";
 	context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
@@ -30,7 +30,7 @@ function criarBG() {
 // cria cobrinha
 function criarCobra() {
 	for(i = 0; i < snake.length; i++){
-		context.fillStyle = "black";
+		context.fillStyle = "#FFEB4D";
 		context.fillRect(snake[i].x, snake[i].y, box, box);
 	}
 }
@@ -38,7 +38,7 @@ function criarCobra() {
 // Criar comida
 
 function drawFood(){
-	context.fillStyle = "red";
+	context.fillStyle = "#BB2020";
 	context.fillRect(food.x, food.y, box, box);
 }
 
@@ -61,6 +61,17 @@ function iniciarJogo() {
 	if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
 	if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
 	if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box
+
+
+
+	//ver se a cobrinha toca no corpo dela
+	for(i = 1; i < snake.length; i++){
+		if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+			//se a posição da cabeça no eixo X for a mesma de alguma parte do corpo dela no eixo X e a posição da cabeça no eixo Y for a mesma dessa parte do corpo no eixo y
+			clearInterval(jogo);
+			alert('Game Over: ' + snake.length + " pontos :(" );
+		}
+	}
 
 
 
