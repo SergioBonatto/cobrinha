@@ -14,6 +14,11 @@ snake[0] = {
 
 let direction = "right";
 
+let food = { //Math.floor retira a parte flutuante (0.) do Math.random, só vem inteiro e o Math.random retorna um numero aleatorio até 1
+	x: Math.floor(Math.random() * 15 + 1) * box,
+	y: Math.floor(Math.random() * 15 + 1) * box
+}
+
 // Funções
 
 // cria BG
@@ -29,6 +34,13 @@ function criarCobra() {
 		context.fillStyle = "black";
 		context.fillRect(snake[i].x, snake[i].y, box, box);
 	}
+}
+
+// Criar comida
+
+function drawFood(){
+	context.fillStyle = "red";
+	context.fillRect(food.x, food.y, box, box);
 }
 
 document.addEventListener("keydown", update); //keydown é o clique no teclado
@@ -56,6 +68,7 @@ function iniciarJogo() {
 	//starta funções
 	criarBG();
 	criarCobra();
+	drawFood();
 
 	// setando posição inicial da cobrinha
 	let snakeX = snake[0].x;
