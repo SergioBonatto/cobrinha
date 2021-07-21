@@ -11,7 +11,6 @@ snake[0] = {
 
 }
 
-
 let direction = "right";
 
 let food = { //Math.floor retira a parte flutuante (0.) do Math.random, só vem inteiro e o Math.random retorna um numero aleatorio até 1
@@ -80,9 +79,17 @@ function iniciarJogo() {
 	if(direction == "up") snakeY -= box;
 	if(direction == "down") snakeY += box;
 	
-	//retirar box final para movimento
-	snake.pop();
 
+	// alimentar cobrinha
+	if(snakeX != food.x || snakeY != food.y){ //toda vez que a posição da cabeça for diferente da comida
+		snake.pop(); //retirar box final para movimento
+	} 
+	else{ //quando for igual, cria outra localização pra comida
+		food.x = Math.floor(Math.random() * 15 + 1) * box;
+		food.y = Math.floor(Math.random() * 15 + 1) * box;
+	}
+
+	
 	//adiciona box inicial para movimento (cabeça)
 	let newHead = {
 		x: snakeX, 
